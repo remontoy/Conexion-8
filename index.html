@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Plataforma SEL – Prototipo</title>
+  <style>
+    :root{
+      --bg:#f4f8fb; --panel:#ffffff; --primary:#2f80ed; --primary-2:#56ccf2;
+      --ok:#27ae60; --warn:#f2c94c; --text:#1f2937; --muted:#6b7280;
+      --accent:#10b981; --soft:#e8f1fb; --chip:#eef2ff;
+      --radius:16px; --shadow:0 10px 30px rgba(31,41,55,.08);
+    }
+    *{box-sizing:border-box}
+    html,body{
+      height:100%;margin:0;
+      font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+      background:var(--bg);color:var(--text);
+    }
+    .stage{max-width:1200px;aspect-ratio:16/9;margin:24px auto;padding:0 16px}
+    .card{background:var(--panel);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;height:100%;display:flex;flex-direction:column}
+    header{
+      display:flex;gap:16px;align-items:center;justify-content:space-between;
+      padding:18px 22px;background:linear-gradient(90deg,var(--primary),var(--primary-2));color:#fff;
+    }
+    header h1{margin:0;font-size:18px;font-weight:700}
+    .tabs{display:flex;gap:8px;flex-wrap:wrap}
+    .tab{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.25);color:#fff;
+      padding:8px 12px;border-radius:999px;cursor:pointer;font-weight:600;font-size:13px}
+    .tab.active{background:#fff;color:var(--primary)}
+    main{display:grid;grid-template-columns:280px 1fr;gap:18px;padding:18px;flex:1;min-height:0}
+    aside{background:var(--soft);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:16px}
+    aside .badge{display:flex;align-items:center;gap:10px;background:#fff;border-radius:12px;padding:12px}
+    .pill{display:inline-block;background:var(--chip);padding:4px 10px;border-radius:999px;font-size:12px;color:#4b5563}
+    .hint{font-size:12px;color:var(--muted)}
+    .screen{display:none;height:100%;overflow:auto;padding-right:4px}
+    .screen.active{display:block}
+
+    .field{margin-bottom:10px}
+    .field label{display:block;font-size:13px;font-weight:600;margin-bottom:4px}
+    .field input{width:100%;padding:8px 10px;border-radius:10px;border:1px solid #d1d5db;font:inherit}
+
+    .profile-summary{background:#fff;border-radius:12px;border:1px solid #e5e7eb;padding:14px;margin-bottom:14px}
+    .progress-wrapper{margin:10px 0 4px}
+    .progress-bar{height:8px;border-radius:999px;background:#e5e7eb;overflow:hidden}
+    .progress-bar-inner{height:100%;background:var(--primary);width:0%}
+    .level-badge{font-size:13px;font-weight:600}
+
+    .btn{background:var(--primary);color:#fff;border:none;border-radius:10px;padding:10px 14px;font-weight:700;cursor:pointer;font-size:13px}
+    .btn.secondary{background:#e5efff;color:#1e40af}
+    .btn.sm{padding:6px 10px;font-size:12px}
+
+    .question{background:#fff;border:1px solid #edf2f7;border-radius:12px;padding:10px 12px;margin-bottom:8px}
+    .question-header{font-size:13px;margin-bottom:6px}
+    .likert{display:flex;gap:6px;flex-wrap:wrap}
+    .likert label{font-size:11px;display:flex;align-items:center;gap:3px;background:#f9fafb;border-radius:999px;padding:4px 7px;border:1px solid #e5e7eb;cursor:pointer}
+    .likert input{margin:0}
+
+    .panel{background:#fff;border:1px solid #edf2f7;border-radius:12px;padding:16px;margin-bottom:12px}
+    textarea{width:100%;min-height:140px;border-radius:12px;border:1px solid #d1d5db;padding:10px;font:inherit;resize:vertical}
+
+    .grid{display:grid;grid-template-columns:1fr 1fr 280px;gap:16px}
+    .kpi{display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #edf2f7;border-radius:12px;padding:16px}
+    .donut{--p:0;width:84px;height:84px;border-radius:50%;background:conic-gradient(var(--accent) calc(var(--p)*1%),#eef2f7 0);display:grid;place-items:center}
+    .donut span{background:#fff;border-radius:50%;width:62px;height:62px;display:grid;place-items:center;font-weight:800;color:#111827}
+    .timeline{background:#fff;border:1px solid #edf2f7;border-radius:12px;padding:16px}
+    .step{display:flex;align-items:center;gap:10px;margin:10px 0}
+    .dot{width:12px;height:12px;border-radius:50%;background:var(--primary)}
+    .step.done .dot{background:var(--accent)}
+    .step .meta{font-size:12px;color:var(--muted)}
+
+    .courses{margin-top:10px}
+    .courses-header{font-weight:800;margin-bottom:6px}
+    .course-card{background:#fff;border-radius:10px;border:1px solid #e5e7eb;padding:10px 12px;margin-bottom:6px;font-size:13px}
+
+    footer{display:flex;justify-content:flex-end;gap:8px;padding:10px 18px;background:#fafafa;border-top:1px solid #e5e7eb}
+    footer .hint{margin-right:auto}
+
+    @media (max-width: 900px){
+      main{grid-template-columns:1fr}
+      .grid{grid-template-columns:1fr}
+      .stage{padding:0}
+    }
+  </style>
+</head>
+<body>
+  <div class="stage">
+    <div class="card" role="application" aria-label="Prototipo plataforma SEL">
+      <header>
+        <h1>Plataforma SEL – Prototipo</h1>
+        <nav class="tabs" aria-label="Navegación principal">
+          <button class="tab active" data-screen="perfil">Perfil</button>
+          <button class="tab" data-screen="eval">Evaluación</button>
+          <button class="tab" data-screen="obs">Mis observaciones</button>
+          <button class="tab" data-screen="mentoria">Acción y mentoría</button>
+        </nav>
+      </header>
+
+      <main>
+        <aside aria-label="Panel lateral">
+          <div class="badge">
+            <div style="width:46px;height:46px;border-radius:50%;background:#dbeafe;display:grid;place-items:center;font-weight:900;color:#1e40af">👤</div>
+            <div>
+              <div style="font-weight:700">Estudiante actual</div>
+              <div id="asideNombre" class="pill">Sin registrar</div>
+            </div>
+          </div>
+          <div class="badge">
+            <div class="donut" id="asideDonut" style="--p:0"><span id="asideScore">0%</span></div>
+            <div>
+              <div style="font-weight:700">Habilidades Sociales</div>
+              <div class="hint" id="asideNivel">Sin evaluación</div>
+            </div>
+          </div>
+          <div class="badge">
+            <div>🧠</div>
+            <div>
+              <div style="font-weight:700">Consejo</div>
+              <div class="hint">Primero completa tu perfil, luego realiza el test de habilidades sociales.</div>
+            </div>
+          </div>
+        </aside>
+
+        <!-- PERFIL -->
+        <section id="perfil" class="screen active">
+          <h2 style="margin:4px 0 10px">Perfil del estudiante</h2>
+          <div class="profile-summary">
+            <form id="formPerfil">
+              <div class="field">
+                <label for="nombre">Nombre del estudiante</label>
+                <input id="nombre" required placeholder="Ej. Ana Pérez" />
+              </div>
+              <div class="field">
+                <label for="curso">Curso / Grado</label>
+                <input id="curso" placeholder="Ej. 1ro Bachillerato" />
+              </div>
+              <div class="field">
+                <label for="paralelo">Paralelo</label>
+                <input id="paralelo" placeholder="Ej. A, B, C..." />
+              </div>
+              <button class="btn" type="submit">Guardar perfil</button>
+            </form>
+          </div>
+
+          <div class="profile-summary" id="perfilResultado">
+            <h3 style="margin-top:0">Resultado del test de habilidades sociales</h3>
+            <div id="perfilEstado" class="hint">Aún no has realizado el test.</div>
+            <div class="progress-wrapper">
+              <div class="progress-bar">
+                <div class="progress-bar-inner" id="perfilBar"></div>
+              </div>
+            </div>
+            <div class="level-badge" id="perfilCategoria"></div>
+            <p class="hint" id="perfilDetalle"></p>
+          </div>
+
+          <div class="profile-summary" id="perfilCursos" style="display:none">
+            <h3 style="margin-top:0">Ruta de cursos SEL recomendados</h3>
+            <p class="hint">
+              Has alcanzado un nivel alto de habilidades sociales. Se habilita una ruta de cursos en línea para seguir potenciando tu liderazgo y apoyo a tus compañeros.
+            </p>
+            <div class="courses">
+              <div class="courses-header">Malla de cursos</div>
+              <div class="course-card">
+                <strong>Unidad 1 – Primeras habilidades sociales</strong><br>
+                Escucha activa, atención a instrucciones, presentarse y agradecer.
+              </div>
+              <div class="course-card">
+                <strong>Unidad 2 – Habilidades sociales avanzadas</strong><br>
+                Pedir ayuda, dar indicaciones claras, integrarse a grupos de manera respetuosa.
+              </div>
+              <div class="course-card">
+                <strong>Unidad 3 – Manejo de emociones</strong><br>
+                Reconocer y expresar emociones, empatía, interés genuino por los demás.
+              </div>
+              <div class="course-card">
+                <strong>Unidad 4 – Alternativas a la agresión</strong><br>
+                Pedir permiso, compartir, defender derechos sin violencia.
+              </div>
+              <div class="course-card">
+                <strong>Unidad 5 – Afrontamiento del estrés</strong><br>
+                Resolver conflictos justos, manejar vergüenza, aprender de los errores.
+              </div>
+              <div class="course-card">
+                <strong>Unidad 6 – Planificación y toma de decisiones</strong><br>
+                Organizar tareas, elegir la mejor opción posible y preparar proyectos de servicio.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- EVALUACIÓN -->
+        <section id="eval" class="screen">
+          <h2 style="margin:4px 0 8px">Test de Habilidades Sociales de Goldstein (versión adaptada)</h2>
+          <p class="hint" style="margin-bottom:8px">
+            Marca con qué frecuencia se presenta cada habilidad. Escala: 1 = Nunca · 2 = Rara vez · 3 = A veces · 4 = A menudo · 5 = Siempre.
+          </p>
+          <div id="questionsContainer"></div>
+          <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:8px">
+            <button class="btn secondary sm" id="btnLimpiarTest">Limpiar respuestas</button>
+            <button class="btn" id="btnCalcular">Calcular resultado</button>
+          </div>
+          <p id="evalMensaje" class="hint" style="margin-top:8px"></p>
+        </section>
+
+        <!-- OBSERVACIONES -->
+        <section id="obs" class="screen">
+          <div class="panel">
+            <h2 style="margin:0 0 6px">Subir observación de comportamiento o dinámica grupal</h2>
+            <p class="hint">Esta información será revisada por el DECE y/o docente guía para fortalecer la convivencia del curso.</p>
+          </div>
+          <div class="panel">
+            <label for="obsText" style="font-weight:700;display:block;margin-bottom:6px">Registro (diario del curso)</label>
+            <textarea id="obsText" placeholder="Hoy en el recreo faltaba un jugador; mi compañera estaba disponible, pero no la incluyeron..."></textarea>
+            <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:10px">
+              <button class="btn secondary sm" id="draft">Guardar borrador</button>
+              <button class="btn sm" id="send">Enviar observación</button>
+            </div>
+            <p class="hint" id="obsStatus"></p>
+          </div>
+        </section>
+
+        <!-- ACCIÓN Y MENTORÍA -->
+        <section id="mentoria" class="screen">
+          <h2 style="margin:4px 0 12px">Fase de Acción y Mentoría: Resultados del Curso y Plan de Intervención</h2>
+          <div class="grid">
+            <div class="kpi">
+              <div class="donut" style="--p:75"><span>75%</span></div>
+              <div>
+                <div style="font-weight:800">Habilidades Sociales (curso)</div>
+                <div class="hint">Empatía · Comunicación · Cooperación</div>
+              </div>
+            </div>
+            <div class="kpi">
+              <div class="donut" style="--p:15;background:conic-gradient(var(--primary) calc(15*1%), #eef2f7 0)"><span>+15%</span></div>
+              <div>
+                <div style="font-weight:800">Resolución de conflictos</div>
+                <div class="hint">Mejora desde la última medición</div>
+              </div>
+            </div>
+            <div class="timeline">
+              <div style="font-weight:800;margin-bottom:8px">Fases del proyecto</div>
+              <div class="step done">
+                <div class="dot"></div>
+                <div>
+                  <div><strong>Planificación</strong> (100% completada)</div>
+                  <div class="meta">Acuerdos, roles, calendario.</div>
+                </div>
+              </div>
+              <div class="step done">
+                <div class="dot"></div>
+                <div>
+                  <div><strong>Diseño</strong> (100% completada)</div>
+                  <div class="meta">Proyecto artístico colaborativo.</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="dot"></div>
+                <div>
+                  <div><strong>Ejecución</strong> (65% completada)</div>
+                  <div class="meta">Ensayos / elaboración del mural.</div>
+                </div>
+              </div>
+              <div class="step">
+                <div class="dot"></div>
+                <div>
+                  <div><strong>Evaluación</strong> (0% iniciada)</div>
+                  <div class="meta">Postest SEL + reporte DECE.</div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div style="font-weight:800;margin-bottom:6px">Observaciones destacadas (DECE)</div>
+              <p style="margin:0 0 10px">
+                El grupo muestra mayor afinidad por las habilidades artísticas, especialmente en artes plásticas.
+                Se recomienda un proyecto de <em>service learning</em> orientado a la expresión visual y creativa.
+              </p>
+              <ul style="margin:0 0 10px 16px;color:#374151">
+                <li>+12% en comunicación</li>
+                <li>+8% en empatía desde la última medición</li>
+              </ul>
+              <div style="display:flex;gap:8px;flex-wrap:wrap">
+                <button class="btn secondary sm">Ver comentarios del DECE</button>
+                <button class="btn sm">Registrar avance</button>
+                <button class="btn sm">Descargar reporte</button>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+
+      <footer>
+        <span class="hint">Prototipo estático (HTML/CSS/JS). Los datos se guardan solo en este navegador.</span>
+        <button class="btn secondary sm" id="prev">◀ Anterior</button>
+        <button class="btn sm" id="next">Siguiente ▶</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    /* ---------- Tabs ---------- */
+    const tabs = document.querySelectorAll('.tab');
+    const screens = {
+      perfil: document.getElementById('perfil'),
+      eval: document.getElementById('eval'),
+      obs: document.getElementById('obs'),
+      mentoria: document.getElementById('mentoria')
+    };
+    const order = ['perfil','eval','obs','mentoria'];
+
+    function setActive(key){
+      tabs.forEach(t=>t.classList.toggle('active', t.dataset.screen===key));
+      Object.entries(screens).forEach(([k,el])=>el.classList.toggle('active', k===key));
+      window.location.hash = key;
+    }
+    tabs.forEach(t=>t.addEventListener('click',()=>setActive(t.dataset.screen)));
+    document.getElementById('next').onclick = ()=>{
+      const hash = window.location.hash.replace('#','')||'perfil';
+      const idx = (order.indexOf(hash)+1)%order.length; setActive(order[idx]);
+    };
+    document.getElementById('prev').onclick = ()=>{
+      const hash = window.location.hash.replace('#','')||'perfil';
+      const idx = (order.indexOf(hash)-1+order.length)%order.length; setActive(order[idx]);
+    };
+
+    /* ---------- Preguntas Goldstein (50 ítems) ---------- */
+    const items = [
+      "¿Presta atención a la persona que está hablando y hace un esfuerzo para comprender lo que está diciendo?",
+      "¿Habla con los demás de temas poco importantes para luego pasar a los más importantes?",
+      "¿Habla con otras personas sobre cosas que interesan a ambos?",
+      "¿Determina la información que necesita y se la pide a la persona adecuada?",
+      "¿Permite que los demás sepan que agradece los favores que le hacen?",
+      "¿Se da a conocer a los demás por iniciativa propia?",
+      "¿Ayuda a que otras personas se conozcan entre sí?",
+      "¿Dice a los demás que le gusta algo de ellos o de lo que hacen?",
+      "¿Pide que le ayuden cuando tiene alguna dificultad?",
+      "¿Elige la mejor forma para integrarse en un grupo o participar en una actividad?",
+      "¿Explica con claridad a los demás cómo hacer una tarea específica?",
+      "¿Presta atención a las instrucciones, pide aclaraciones y las cumple correctamente?",
+      "¿Pide disculpas a los demás por haber hecho algo mal?",
+      "¿Intenta persuadir a los demás de que sus ideas son mejores o más útiles?",
+      "¿Intenta reconocer las emociones que está experimentando?",
+      "¿Permite que los demás conozcan lo que siente?",
+      "¿Intenta comprender lo que sienten los demás?",
+      "¿Intenta comprender el enfado de otras personas?",
+      "¿Permite que los demás sepan que se preocupa o interesa por ellos?",
+      "¿Piensa por qué está asustado y hace algo para disminuir su miedo?",
+      "¿Se dice cosas agradables o se recompensa cuando siente que lo merece?",
+      "¿Reconoce cuándo es necesario pedir permiso para hacer algo y lo pide a la persona indicada?",
+      "¿Se ofrece para compartir algo que es apreciado por los demás?",
+      "¿Ayuda a quien lo necesita?",
+      "¿Llega a un acuerdo que satisfaga tanto a él/ella como a quienes piensan diferente?",
+      "¿Controla su carácter para que las cosas no se salgan de control?",
+      "¿Defiende sus derechos dando a conocer su punto de vista?",
+      "¿Se las arregla sin perder el control cuando los demás le hacen bromas?",
+      "¿Se mantiene al margen de situaciones que pueden causarle problemas?",
+      "¿Encuentra otras formas de resolver situaciones difíciles sin pelearse?",
+      "¿Les dice a los demás cuando han sido responsables de un problema e intenta buscar una solución?",
+      "¿Intenta llegar a una solución justa ante la queja justificada de alguien?",
+      "¿Expresa un cumplido sincero a los demás por la forma en que han jugado o actuado?",
+      "¿Hace algo que le ayude a sentirse menos avergonzado/a o cohibido/a?",
+      "¿Determina si lo han dejado de lado en alguna actividad y hace algo para sentirse mejor?",
+      "¿Manifiesta a los demás que han tratado injustamente a un amigo?",
+      "¿Considera con cuidado la posición de otra persona, comparándola con la propia, antes de decidir qué hacer?",
+      "¿Comprende por qué ha fracasado en alguna situación y qué podría hacer para tener más éxito?",
+      "¿Reconoce y resuelve la confusión cuando los demás dicen una cosa pero hacen otra?",
+      "¿Comprende lo que significa una acusación, por qué se la han hecho y piensa cómo relacionarse con esa persona?",
+      "¿Planifica cómo expondrá su punto de vista antes de una conversación problemática?",
+      "¿Decide lo que quiere hacer cuando los demás quieren que haga algo distinto?",
+      "¿Resuelve el aburrimiento iniciando una actividad más interesante?",
+      "¿Reconoce cuando un acontecimiento es consecuencia de algo que está bajo su control?",
+      "¿Toma decisiones realistas sobre lo que es capaz de hacer antes de comenzar una tarea?",
+      "¿Es realista al explicar cómo puede desenvolverse en una determinada tarea?",
+      "¿Resuelve lo que necesita saber y cómo conseguir esa información?",
+      "¿Determina de forma realista cuál problema es más importante y lo soluciona primero?",
+      "¿Considera distintas posibilidades y elige la que le hará sentirse mejor?",
+      "¿Se organiza y se prepara para facilitar la ejecución de su trabajo?"
+    ];
+
+    const questionsContainer = document.getElementById('questionsContainer');
+    items.forEach((text, idx)=>{
+      const n = idx+1;
+      const q = document.createElement('div');
+      q.className = 'question';
+      q.innerHTML = `
+        <div class="question-header"><strong>${n}.</strong> ${text}</div>
+        <div class="likert">
+          <label><input type="radio" name="q${n}" value="1"> 1</label>
+          <label><input type="radio" name="q${n}" value="2"> 2</label>
+          <label><input type="radio" name="q${n}" value="3"> 3</label>
+          <label><input type="radio" name="q${n}" value="4"> 4</label>
+          <label><input type="radio" name="q${n}" value="5"> 5</label>
+        </div>
+      `;
+      questionsContainer.appendChild(q);
+    });
+
+    /* ---------- Perfil y resultado ---------- */
+    const formPerfil = document.getElementById('formPerfil');
+    const nombreInput = document.getElementById('nombre');
+    const cursoInput = document.getElementById('curso');
+    const paraleloInput = document.getElementById('paralelo');
+
+    let perfil = null;        // {nombre, curso, paralelo}
+    let resultado = null;     // {total, categoria, porcentaje}
+
+    function guardarPerfilLocal(){
+      localStorage.setItem('sel_perfil', JSON.stringify(perfil));
+    }
+    function guardarResultadoLocal(){
+      localStorage.setItem('sel_resultado', JSON.stringify(resultado));
+    }
+
+    function cargarDesdeLocalStorage(){
+      const p = localStorage.getItem('sel_perfil');
+      const r = localStorage.getItem('sel_resultado');
+      if(p){
+        perfil = JSON.parse(p);
+        nombreInput.value = perfil.nombre || "";
+        cursoInput.value = perfil.curso || "";
+        paraleloInput.value = perfil.paralelo || "";
+      }
+      if(r){ resultado = JSON.parse(r); }
+      actualizarUIPerfil();
+    }
+
+    function actualizarUIPerfil(){
+      const asideNombre = document.getElementById('asideNombre');
+      const asideScore = document.getElementById('asideScore');
+      const asideDonut = document.getElementById('asideDonut');
+      const asideNivel = document.getElementById('asideNivel');
+      const perfilEstado = document.getElementById('perfilEstado');
+      const perfilBar = document.getElementById('perfilBar');
+      const perfilCategoria = document.getElementById('perfilCategoria');
+      const perfilDetalle = document.getElementById('perfilDetalle');
+      const perfilCursos = document.getElementById('perfilCursos');
+
+      if(perfil && perfil.nombre){
+        asideNombre.textContent = perfil.nombre;
+      } else {
+        asideNombre.textContent = "Sin registrar";
+      }
+
+      if(resultado){
+        asideScore.textContent = resultado.porcentaje + "%";
+        asideDonut.style.setProperty('--p', resultado.porcentaje);
+        asideNivel.textContent = "Nivel " + resultado.categoria.toLowerCase();
+        perfilEstado.textContent = `Puntaje total: ${resultado.total} puntos (${resultado.porcentaje}%)`;
+        perfilCategoria.textContent = "Nivel de habilidades sociales: " + resultado.categoria.toUpperCase();
+        if(resultado.categoria === "Alto"){
+          perfilDetalle.textContent = "Presenta un desarrollo alto de habilidades sociales. Es candidato ideal para liderazgo y acompañamiento entre pares.";
+          perfilCursos.style.display = "block";
+        } else if(resultado.categoria === "Medio"){
+          perfilDetalle.textContent = "Desarrollo medio: hay una buena base, pero aún hay espacio para fortalecer habilidades específicas.";
+          perfilCursos.style.display = "none";
+        } else {
+          perfilDetalle.textContent = "Desarrollo bajo: se recomienda acompañamiento cercano y actividades de apoyo socioemocional.";
+          perfilCursos.style.display = "none";
+        }
+        perfilBar.style.width = resultado.porcentaje + "%";
+      } else {
+        asideScore.textContent = "0%";
+        asideDonut.style.setProperty('--p', 0);
+        asideNivel.textContent = "Sin evaluación";
+        perfilEstado.textContent = "Aún no has realizado el test.";
+        perfilCategoria.textContent = "";
+        perfilDetalle.textContent = "";
+        perfilBar.style.width = "0%";
+        perfilCursos.style.display = "none";
+      }
+    }
+
+    formPerfil.addEventListener('submit', (e)=>{
+      e.preventDefault();
+      perfil = {
+        nombre: nombreInput.value.trim(),
+        curso: cursoInput.value.trim(),
+        paralelo: paraleloInput.value.trim()
+      };
+      guardarPerfilLocal();
+      actualizarUIPerfil();
+      alert("Perfil guardado para la simulación.");
+    });
+
+    /* ---------- Cálculo del test ---------- */
+    const btnCalcular = document.getElementById('btnCalcular');
+    const evalMensaje = document.getElementById('evalMensaje');
+
+    btnCalcular.addEventListener('click', ()=>{
+      let total = 0;
+      for(let i=1;i<=items.length;i++){
+        const sel = document.querySelector(`input[name="q${i}"]:checked`);
+        if(!sel){
+          evalMensaje.textContent = `Falta responder la pregunta ${i}.`;
+          evalMensaje.style.color = "#b91c1c";
+          return;
+        }
+        total += Number(sel.value);
+      }
+      // Rango posible: 50 a 250
+      let categoria;
+      if(total >= 188) categoria = "Alto";
+      else if(total >= 118) categoria = "Medio";
+      else categoria = "Bajo";
+
+      const porcentaje = Math.round((total / 250) * 100);
+
+      resultado = { total, categoria, porcentaje };
+      guardarResultadoLocal();
+      actualizarUIPerfil();
+
+      evalMensaje.textContent = `Resultado guardado. Puntaje: ${total} (${porcentaje}%) – Nivel ${categoria.toUpperCase()}. Revisa la pestaña "Perfil".`;
+      evalMensaje.style.color = "#065f46";
+    });
+
+    document.getElementById('btnLimpiarTest').addEventListener('click',()=>{
+      for(let i=1;i<=items.length;i++){
+        document.querySelectorAll(`input[name="q${i}"]`).forEach(r=>r.checked=false);
+      }
+      evalMensaje.textContent = "Respuestas limpiadas para esta simulación.";
+      evalMensaje.style.color = "#374151";
+    });
+
+    /* ---------- Observaciones demo ---------- */
+    document.getElementById('send').addEventListener('click',()=>{
+      const v = document.getElementById('obsText').value.trim();
+      const s = document.getElementById('obsStatus');
+      if(!v){
+        s.textContent = 'Escribe una observación antes de enviar.';
+        s.style.color = '#b91c1c';
+        return;
+      }
+      s.textContent = 'Observación enviada y registrada en la base del curso (demo).';
+      s.style.color = '#065f46';
+      document.getElementById('obsText').value = '';
+    });
+    document.getElementById('draft').addEventListener('click',()=>{
+      const s = document.getElementById('obsStatus');
+      s.textContent = 'Borrador guardado localmente (demo).';
+      s.style.color = '#374151';
+    });
+
+    /* ---------- Init ---------- */
+    if(location.hash && screens[location.hash.slice(1)]){
+      setActive(location.hash.slice(1));
+    }else{
+      setActive('perfil');
+    }
+    cargarDesdeLocalStorage();
+  </script>
+</body>
+</html>
