@@ -1,175 +1,260 @@
 <!DOCTYPE html>
-<html class="dark" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Proyecto de Aprendizaje de Servicio</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
-<style>
-        .material-symbols-outlined {
-            font-variation-settings:
-            'FILL' 0,
-            'wght' 400,
-            'GRAD' 0,
-            'opsz' 24;
-            font-size: 24px;
+<html class="dark" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Proyecto de Aprendizaje de Servicio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Spline+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+      font-size: 24px;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1;
+    }
+  </style>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: "#2b8cee",
+            "background-light": "#f6f7f8",
+            "background-dark": "#101922"
+          },
+          fontFamily: {
+            display: "Spline Sans"
+          },
+          borderRadius: {
+            DEFAULT: "1rem",
+            lg: "2rem",
+            xl: "3rem",
+            full: "9999px"
+          }
         }
-        .material-symbols-outlined.fill {
-            font-variation-settings: 'FILL' 1;
-        }
-    </style>
-<script id="tailwind-config">tailwind.config = {darkMode: "class", theme: {extend: {colors: {primary: "#2b8cee", "background-light": "#f6f7f8", "background-dark": "#101922"}, fontFamily: {display: "Spline Sans"}, borderRadius: {DEFAULT: "1rem", lg: "2rem", xl: "3rem", full: "9999px"}}}};</script>
+      }
+    };
+  </script>
 </head>
 <body class="bg-background-light dark:bg-background-dark font-display">
 <div class="relative flex h-auto min-h-screen w-full flex-col">
-<div class="flex h-full grow flex-row">
-<aside class="flex h-screen min-h-[700px] w-64 flex-col justify-between bg-white/5 p-4 sticky top-0">
-<div class="flex flex-col gap-4">
-<div class="flex items-center gap-3 p-2">
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="Avatar de usuario" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeMEu27uqeeFetXG9Gs05ArQC07rFfNjK5pZR9mgaeoWRLF1Wd7ScgkziN7tK0MH-MoR8nGA5qvJAtFTU0w3-Hc9TXtWp02ykzs6JyBIsYq1QD8eideS45jqlGmbrN7tOV0pWId9hn39xFesjKpsYXk_a5ROjN2HrZuMOdyVbgLyWGVshdTOIhp5sKcHYWjeL61fUv_yPgtjdivzbPyVdG7VIfEiIeXVatJEUH6wwEJZd0HesxRTWk2oBFnCYesg-scq4Uc60MRdY");'></div>
-<div class="flex flex-col">
-<h1 class="text-white text-base font-medium leading-normal">Carlos Mendoza</h1>
-<p class="text-white/60 text-sm font-normal leading-normal">DECE</p>
+  <div class="flex h-full grow flex-row">
+
+    <!-- SIDEBAR -->
+    <aside class="flex h-screen min-h-[700px] w-64 flex-col justify-between bg-white/5 p-4 sticky top-0">
+      <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-3 p-2">
+          <div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+               data-alt="Avatar de usuario"
+               style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuAeMEu27uqeeFetXG9Gs05ArQC07rFfNjK5pZR9mgaeoWRLF1Wd7ScgkziN7tK0MH-MoR8nGA5qvJAtFTU0w3-Hc9TXtWp02ykzs6JyBIsYq1QD8eideS45jqlGmbrN7tOV0pWId9hn39xFesjKpsYXk_a5ROjN2HrZuMOdyVbgLyWGVshdTOIhp5sKcHYWjeL61fUv_yPgtjdivzbPyVdG7VIfEiIeXVatJEUH6wwEJZd0HesxRTWk2oBFnCYesg-scq4Uc60MRdY");'></div>
+          <div class="flex flex-col">
+            <h1 class="text-white text-base font-medium leading-normal">Carlos Mendoza</h1>
+            <p class="text-white/60 text-sm font-normal leading-normal">DECE</p>
+          </div>
+        </div>
+
+        <nav class="flex flex-col gap-2">
+          <!-- Dashboard estudiante -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="dashboard%20Estudiante.html">
+            <span class="material-symbols-outlined">dashboard</span>
+            <p class="text-sm font-medium leading-normal">Dashboard</p>
+          </a>
+
+          <!-- Estudiantes (placeholder, si luego haces otra pantalla) -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="#">
+            <span class="material-symbols-outlined">groups</span>
+            <p class="text-sm font-medium leading-normal">Estudiantes</p>
+          </a>
+
+          <!-- Manual de Reconocimiento -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="Manual%20ESTUDIANTE.html">
+            <span class="material-symbols-outlined">menu_book</span>
+            <p class="text-sm font-medium leading-normal">Manual de Reconocimiento</p>
+          </a>
+
+          <!-- Evaluación de Habilidades -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="Viñeta%20evaluaciones%20ESTUDIANTE.html">
+            <span class="material-symbols-outlined">checklist</span>
+            <p class="text-sm font-medium leading-normal">Evaluación de Habilidades</p>
+          </a>
+
+          <!-- Formación de Líderes -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="viñeta%20formacion%20de%20lideres%20ESTUDIANTE.html">
+            <span class="material-symbols-outlined">military_tech</span>
+            <p class="text-sm font-medium leading-normal">Formación de Líderes</p>
+          </a>
+
+          <!-- Proyecto de Aprendizaje (actual, activo) -->
+          <a class="flex items-center gap-3 px-3 py-2 rounded bg-primary text-white"
+             href="Proyecto%20de%20Aprendizaje%20de%20Servicio.html">
+            <span class="material-symbols-outlined fill">emoji_objects</span>
+            <p class="text-sm font-medium leading-normal">Proyecto de Aprendizaje de Servicio</p>
+          </a>
+
+          <!-- Reporte de Comportamientos -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="Viñeta%20reportes%20ESTUDAINTE.html">
+            <span class="material-symbols-outlined">lab_profile</span>
+            <p class="text-sm font-medium leading-normal">Reporte de Comportamientos</p>
+          </a>
+
+          <!-- Calendario (placeholder) -->
+          <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+             href="#">
+            <span class="material-symbols-outlined">calendar_today</span>
+            <p class="text-sm font-medium leading-normal">Calendario</p>
+          </a>
+        </nav>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+           href="#">
+          <span class="material-symbols-outlined">settings</span>
+          <p class="text-sm font-medium leading-normal">Configuración</p>
+        </a>
+        <a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded"
+           href="#">
+          <span class="material-symbols-outlined">help</span>
+          <p class="text-sm font-medium leading-normal">Ayuda</p>
+        </a>
+      </div>
+    </aside>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="flex-1 p-8">
+      <div class="mx-auto max-w-5xl">
+        <header class="flex flex-wrap justify-between gap-3 pb-8">
+          <h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">
+            Proyecto de Aprendizaje de Servicio
+          </h1>
+        </header>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+          <div class="lg:col-span-2 flex flex-col gap-6">
+            <div class="flex flex-col items-stretch justify-start rounded-lg bg-white/5 p-6">
+              <div class="flex flex-col items-stretch justify-center gap-2">
+                <h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">
+                  Descripción del Proyecto
+                </h3>
+                <div class="flex flex-col gap-4">
+                  <p class="text-white/60 text-base font-normal leading-relaxed">
+                    Este proyecto tiene como objetivo principal mejorar las áreas verdes de nuestra comunidad escolar
+                    mediante la plantación de árboles nativos y la creación de un jardín comunitario. Los estudiantes
+                    investigarán, planificarán y ejecutarán el proyecto, colaborando con expertos locales.
+                  </p>
+                  <div class="flex flex-col">
+                    <h4 class="text-white font-semibold text-base mb-1">Resultados Esperados:</h4>
+                    <ul class="list-disc pl-5 space-y-1 text-white/60 text-base font-normal">
+                      <li>Plantar 20 árboles nativos en el campus.</li>
+                      <li>Diseñar y mantener un jardín de vegetales.</li>
+                      <li>Crear conciencia sobre la importancia de la biodiversidad local.</li>
+                    </ul>
+                  </div>
+                </div>
+                <div class="flex justify-end mt-4">
+                  <button
+                    class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-white text-sm font-medium leading-normal hover:bg-primary/90 transition-colors">
+                    <span class="truncate">Editar Proyecto</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="flex flex-col gap-4">
+              <h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">
+                Evidencias y Avances
+              </h2>
+              <div
+                class="relative flex w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-white/5 p-8 text-center">
+                <span class="material-symbols-outlined text-primary text-5xl mb-4">cloud_upload</span>
+                <p class="text-white text-lg font-medium">Arrastra tus archivos aquí</p>
+                <p class="text-white/60 text-sm">o</p>
+                <label class="mt-2 cursor-pointer text-sm font-medium text-primary hover:underline" for="file-upload">
+                  haz clic para subirlos
+                </label>
+                <input class="sr-only" id="file-upload" name="file-upload" type="file"/>
+              </div>
+
+              <div class="flex flex-col gap-3">
+                <div class="flex items-center justify-between rounded-lg bg-white/5 p-4">
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                      <span class="material-symbols-outlined">image</span>
+                    </div>
+                    <div>
+                      <p class="font-medium text-white">Fotos_Inauguracion.zip</p>
+                      <p class="text-sm text-white/60">Subido por Ana Suárez el 24/05/2024</p>
+                    </div>
+                  </div>
+                  <button class="text-white/60 hover:text-white">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </div>
+
+                <div class="flex items-center justify-between rounded-lg bg-white/5 p-4">
+                  <div class="flex items-center gap-4">
+                    <div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
+                      <span class="material-symbols-outlined">description</span>
+                    </div>
+                    <div>
+                      <p class="font-medium text-white">Reporte_Inicial.pdf</p>
+                      <p class="text-sm text-white/60">Subido por Juan Pérez el 15/05/2024</p>
+                    </div>
+                  </div>
+                  <button class="text-white/60 hover:text-white">
+                    <span class="material-symbols-outlined">more_vert</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Progreso del proyecto -->
+          <div class="lg:col-span-1">
+            <div class="flex flex-col items-center justify-start rounded-lg bg-white/5 p-6 sticky top-8">
+              <p class="text-white text-lg font-bold leading-tight tracking-[-0.015em] mb-4">
+                Progreso del Proyecto
+              </p>
+              <div class="relative flex items-center justify-center w-48 h-48">
+                <svg class="absolute inset-0" viewBox="0 0 36 36">
+                  <path class="stroke-current text-white/10"
+                        d="M18 2.0845
+                           a 15.9155 15.9155 0 0 1 0 31.831
+                           a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none" stroke-width="3"></path>
+                  <path class="stroke-current text-primary"
+                        d="M18 2.0845
+                           a 15.9155 15.9155 0 0 1 0 31.831
+                           a 15.9155 15.9155 0 0 1 0 -31.831"
+                        fill="none" stroke-dasharray="75, 100" stroke-linecap="round" stroke-width="3"></path>
+                </svg>
+                <div class="flex flex-col items-center">
+                  <span class="text-4xl font-bold text-white">75%</span>
+                  <span class="text-sm text-white/60">Completado</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+  </div>
 </div>
-</div>
-<nav class="flex flex-col gap-2">
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">dashboard</span>
-<p class="text-sm font-medium leading-normal">Dashboard</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">groups</span>
-<p class="text-sm font-medium leading-normal">Estudiantes</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">menu_book</span>
-<p class="text-sm font-medium leading-normal">Manual de Reconocimiento</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">checklist</span>
-<p class="text-sm font-medium leading-normal">Evaluación de Habilidades</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">military_tech</span>
-<p class="text-sm font-medium leading-normal">Formación de Líderes</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 rounded bg-primary text-white" href="#">
-<span class="material-symbols-outlined fill">emoji_objects</span>
-<p class="text-sm font-medium leading-normal">Proyecto de Aprendizaje de Servicio</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">lab_profile</span>
-<p class="text-sm font-medium leading-normal">Reporte de Comportamientos</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">calendar_today</span>
-<p class="text-sm font-medium leading-normal">Calendario</p>
-</a>
-</nav>
-</div>
-<div class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">settings</span>
-<p class="text-sm font-medium leading-normal">Configuración</p>
-</a>
-<a class="flex items-center gap-3 px-3 py-2 text-white/80 hover:text-white hover:bg-white/10 rounded" href="#">
-<span class="material-symbols-outlined">help</span>
-<p class="text-sm font-medium leading-normal">Ayuda</p>
-</a>
-</div>
-</aside>
-<main class="flex-1 p-8">
-<div class="mx-auto max-w-5xl">
-<header class="flex flex-wrap justify-between gap-3 pb-8">
-<h1 class="text-white text-4xl font-black leading-tight tracking-[-0.033em] min-w-72">Proyecto de Aprendizaje de Servicio</h1>
-</header>
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-<div class="lg:col-span-2 flex flex-col gap-6">
-<div class="flex flex-col items-stretch justify-start rounded-lg bg-white/5 p-6">
-<div class="flex flex-col items-stretch justify-center gap-2">
-<h3 class="text-white text-lg font-bold leading-tight tracking-[-0.015em]">Descripción del Proyecto</h3>
-<div class="flex flex-col gap-4">
-<p class="text-white/60 text-base font-normal leading-relaxed">Este proyecto tiene como objetivo principal mejorar las áreas verdes de nuestra comunidad escolar mediante la plantación de árboles nativos y la creación de un jardín comunitario. Los estudiantes investigarán, planificarán y ejecutarán el proyecto, colaborando con expertos locales.</p>
-<div class="flex flex-col">
-<h4 class="text-white font-semibold text-base mb-1">Resultados Esperados:</h4>
-<ul class="list-disc pl-5 space-y-1 text-white/60 text-base font-normal">
-<li>Plantar 20 árboles nativos en el campus.</li>
-<li>Diseñar y mantener un jardín de vegetales.</li>
-<li>Crear conciencia sobre la importancia de la biodiversidad local.</li>
-</ul>
-</div>
-</div>
-<div class="flex justify-end mt-4">
-<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-full h-10 px-6 bg-primary text-white text-sm font-medium leading-normal hover:bg-primary/90 transition-colors">
-<span class="truncate">Editar Proyecto</span>
-</button>
-</div>
-</div>
-</div>
-<div class="flex flex-col gap-4">
-<h2 class="text-white text-[22px] font-bold leading-tight tracking-[-0.015em]">Evidencias y Avances</h2>
-<div class="relative flex w-full flex-col items-center justify-center rounded-lg border-2 border-dashed border-white/20 bg-white/5 p-8 text-center">
-<span class="material-symbols-outlined text-primary text-5xl mb-4">cloud_upload</span>
-<p class="text-white text-lg font-medium">Arrastra tus archivos aquí</p>
-<p class="text-white/60 text-sm">o</p>
-<label class="mt-2 cursor-pointer text-sm font-medium text-primary hover:underline" for="file-upload">haz clic para subirlos</label>
-<input class="sr-only" id="file-upload" name="file-upload" type="file"/>
-</div>
-<div class="flex flex-col gap-3">
-<div class="flex items-center justify-between rounded-lg bg-white/5 p-4">
-<div class="flex items-center gap-4">
-<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
-<span class="material-symbols-outlined">image</span>
-</div>
-<div>
-<p class="font-medium text-white">Fotos_Inauguracion.zip</p>
-<p class="text-sm text-white/60">Subido por Ana Suárez el 24/05/2024</p>
-</div>
-</div>
-<button class="text-white/60 hover:text-white">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</div>
-<div class="flex items-center justify-between rounded-lg bg-white/5 p-4">
-<div class="flex items-center gap-4">
-<div class="flex h-12 w-12 items-center justify-center rounded-lg bg-primary/20 text-primary">
-<span class="material-symbols-outlined">description</span>
-</div>
-<div>
-<p class="font-medium text-white">Reporte_Inicial.pdf</p>
-<p class="text-sm text-white/60">Subido por Juan Pérez el 15/05/2024</p>
-</div>
-</div>
-<button class="text-white/60 hover:text-white">
-<span class="material-symbols-outlined">more_vert</span>
-</button>
-</div>
-</div>
-</div>
-</div>
-<div class="lg:col-span-1">
-<div class="flex flex-col items-center justify-start rounded-lg bg-white/5 p-6 sticky top-8">
-<p class="text-white text-lg font-bold leading-tight tracking-[-0.015em] mb-4">Progreso del Proyecto</p>
-<div class="relative flex items-center justify-center w-48 h-48">
-<svg class="absolute inset-0" viewBox="0 0 36 36">
-<path class="stroke-current text-white/10" d="M18 2.0845
-                                              a 15.9155 15.9155 0 0 1 0 31.831
-                                              a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-width="3"></path>
-<path class="stroke-current text-primary" d="M18 2.0845
-                                              a 15.9155 15.9155 0 0 1 0 31.831
-                                              a 15.9155 15.9155 0 0 1 0 -31.831" fill="none" stroke-dasharray="75, 100" stroke-linecap="round" stroke-width="3"></path>
-</svg>
-<div class="flex flex-col items-center">
-<span class="text-4xl font-bold text-white">75%</span>
-<span class="text-sm text-white/60">Completado</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</main>
-</div>
-</div>
-</body></html>
+</body>
+</html>
