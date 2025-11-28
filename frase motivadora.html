@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-
-<html class="light" lang="es"><head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Bienestar Escolar - Inicio</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com" rel="preconnect"/>
-<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
-<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
+<html class="light" lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Conexión 8 - Inicio</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <link href="https://fonts.googleapis.com" rel="preconnect"/>
+  <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lexend:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
       theme: {
@@ -22,61 +22,92 @@
           fontFamily: {
             "display": ["Lexend", "sans-serif"]
           },
-          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          borderRadius: {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
         },
       },
     }
   </script>
-<style>
+  <style>
     .material-symbols-outlined {
       font-variation-settings:
-      'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24
+        'FILL' 0,
+        'wght' 400,
+        'GRAD' 0,
+        'opsz' 24;
     }
   </style>
 </head>
 <body class="font-display bg-background-light dark:bg-background-dark text-[#111418] dark:text-gray-200">
-<div class="relative flex h-screen w-full flex-col group/design-root overflow-x-hidden">
-<div class="layout-container flex h-full grow flex-col">
-<div class="flex flex-1 justify-center items-center p-4 sm:p-6 md:p-8">
-<div class="layout-content-container flex flex-col w-full max-w-[960px] flex-1">
-<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-6 sm:px-10 py-4">
-<div class="flex items-center gap-4 text-gray-800 dark:text-gray-100">
-<div class="size-6 text-primary">
-<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-<g clip-path="url(#clip0_6_330)">
-<path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
-</g>
-<defs>
-<clippath id="clip0_6_330"><rect fill="white" height="48" width="48"></rect></clippath>
-</defs>
-</svg>
-</div>
-<h2 class="text-lg font-bold tracking-tight">Bienestar Escolar</h2>
-</div>
-<div class="flex flex-1 justify-end gap-8">
-<div class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10" data-alt="User profile picture" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDivfuJMh4treaBOdTbZgFK2OdxRTsRIXQTQ6E_s7bfM2AZ2pBcWuCpXBHCAdssDeUpQgg33GzIixTS5lJuy1UFgCQXYpP28G1M-GfIZYR47RSHe1IlwmjtRpFrPSlOIcjnVEzPB3XeK9EnPnFDYyj02lghNa3-r2yANG6wOKBjwLMck_0DPkdeEmeBZHpprqKnCOUZDJQihcejri3oqw-p05WVIZFdMy8ppOiAeyoW1o19XAzWnKVvsEiZzgo9YHel9xVT27gkkrM");'></div>
-</div>
-</header>
-<main class="flex-grow flex flex-col justify-center items-center px-4 py-12 sm:py-16">
-<div class="flex flex-col items-center gap-6 max-w-2xl text-center">
-<div class="flex gap-3 p-3 flex-wrap pr-4">
-<div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 px-4">
-<p class="text-primary text-sm font-medium leading-normal">Reflexión Docente</p>
-</div>
-</div>
-<h1 class="text-[#111418] dark:text-gray-100 tracking-tight text-3xl sm:text-4xl font-bold leading-tight">¿Qué pequeña victoria puedo celebrar hoy en mi aula?</h1>
-<div class="flex px-4 py-3 justify-center mt-4">
-<button class="flex min-w-[84px] w-48 max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors">
-<span class="truncate">Estoy listo/a</span>
-</button>
-</div>
-</div>
-</main>
-</div>
-</div>
-</div>
-</div>
-</body></html>
+  <div class="relative flex h-screen w-full flex-col group/design-root overflow-x-hidden">
+    <div class="layout-container flex h-full grow flex-col">
+      <div class="flex flex-1 justify-center items-center p-4 sm:p-6 md:p-8">
+        <div class="layout-content-container flex flex-col w-full max-w-[960px] flex-1">
+          <!-- HEADER -->
+          <header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-6 sm:px-10 py-4">
+            <div class="flex items-center gap-4 text-gray-800 dark:text-gray-100">
+              <div class="size-6 text-primary">
+                <svg fill="none" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+                  <g clip-path="url(#clip0_6_330)">
+                    <path clip-rule="evenodd" d="M24 0.757355L47.2426 24L24 47.2426L0.757355 24L24 0.757355ZM21 35.7574V12.2426L9.24264 24L21 35.7574Z" fill="currentColor" fill-rule="evenodd"></path>
+                  </g>
+                  <defs>
+                    <clipPath id="clip0_6_330">
+                      <rect fill="white" height="48" width="48"></rect>
+                    </clipPath>
+                  </defs>
+                </svg>
+              </div>
+              <h2 class="text-lg font-bold tracking-tight">Conexión 8</h2>
+            </div>
+            <div class="flex flex-1 justify-end gap-8">
+              <div
+                class="bg-center bg-no-repeat aspect-square bg-cover rounded-full size-10"
+                data-alt="Foto de perfil de usuario"
+                style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuDivfuJMh4treaBOdTbZgFK2OdxRTsRIXQTQ6E_s7bfM2AZ2pBcWuCpXBHCAdssDeUpQgg33GzIixTS5lJuy1UFgCQXYpP28G1M-GfIZYR47RSHe1IlwmjtRpFrPSlOIcjnVEzPB3XeK9EnPnFDYyj02lghNa3-r2yANG6wOKBjwLMck_0DPkdeEmeBZHpprqKnCOUZDJQihcejri3oqw-p05WVIZFdMy8ppOiAeyoW1o19XAzWnKVvsEiZzgo9YHel9xVT27gkkrM");'>
+              </div>
+            </div>
+          </header>
+
+          <!-- MAIN -->
+          <main class="flex-grow flex flex-col justify-center items-center px-4 py-12 sm:py-16">
+            <div class="flex flex-col items-center gap-6 max-w-2xl text-center">
+              <div class="flex gap-3 p-3 flex-wrap pr-4">
+                <div class="flex h-8 shrink-0 items-center justify-center gap-x-2 rounded-full bg-primary/20 px-4">
+                  <p class="text-primary text-sm font-medium leading-normal">Reflexión inicial</p>
+                </div>
+              </div>
+              <h1 class="text-[#111418] dark:text-gray-100 tracking-tight text-3xl sm:text-4xl font-bold leading-tight">
+                ¿Qué pequeña victoria puedo celebrar hoy en mi aula o con mis compañeros?
+              </h1>
+              <p class="mt-2 text-gray-600 dark:text-gray-300 text-base">
+                Tómate unos segundos para respirar, recordar algo que salió bien hoy y luego continúa a tu panel.
+              </p>
+              <div class="flex px-4 py-3 justify-center mt-4">
+                <button
+                  id="btnListo"
+                  class="flex min-w-[84px] w-48 max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 focus:ring-offset-background-light dark:focus:ring-offset-background-dark transition-colors">
+                  <span class="truncate">Estoy listo/a</span>
+                </button>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Navegación al dashboard -->
+  <script>
+    document.getElementById('btnListo').addEventListener('click', function () {
+      // Aquí decides a qué pantalla quieres ir después de la frase motivadora.
+      // Ahora mismo te llevo al dashboard de estudiante:
+      window.location.href = 'dashboard Estudiante.html';
+    });
+  </script>
+</body>
+</html>
