@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+
+<html lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Reporte de Crisis - Gestión Escolar</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary": "#2b8cee",
+              "background-light": "#f6f7f8",
+              "background-dark": "#101922",
+            },
+            fontFamily: {
+              "display": ["Lexend"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="font-display">
+<div class="relative flex h-auto min-h-screen w-full flex-col bg-background-light dark:bg-background-dark group/design-root overflow-x-hidden text-gray-800 dark:text-gray-200">
+<div class="layout-container flex h-full grow flex-col">
+<div class="px-4 md:px-10 lg:px-40 flex flex-1 justify-center py-5">
+<div class="layout-content-container flex flex-col max-w-[960px] flex-1 bg-white dark:bg-background-dark rounded-xl shadow-sm">
+<header class="flex items-center justify-between whitespace-nowrap border-b border-solid border-gray-200 dark:border-gray-700 px-6 md:px-10 py-4">
+<div class="flex items-center gap-4 text-primary">
+<div class="size-6">
+<svg fill="none" viewbox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+<path d="M24 45.8096C19.6865 45.8096 15.4698 44.5305 11.8832 42.134C8.29667 39.7376 5.50128 36.3314 3.85056 32.3462C2.19985 28.361 1.76794 23.9758 2.60947 19.7452C3.451 15.5145 5.52816 11.6284 8.57829 8.5783C11.6284 5.52817 15.5145 3.45101 19.7452 2.60948C23.9758 1.76795 28.361 2.19986 32.3462 3.85057C36.3314 5.50129 39.7376 8.29668 42.134 11.8833C44.5305 15.4698 45.8096 19.6865 45.8096 24L24 24L24 45.8096Z" fill="currentColor"></path>
+</svg>
+</div>
+<h2 class="text-lg font-bold leading-tight tracking-[-0.015em] text-[#111418] dark:text-white">Gestión Escolar</h2>
+</div>
+</header>
+<main class="flex flex-col flex-1 p-4 md:p-8">
+<div class="flex flex-wrap justify-between gap-3 mb-6">
+<div class="flex min-w-72 flex-col gap-2">
+<p class="text-[#111418] dark:text-white text-3xl md:text-4xl font-black leading-tight tracking-[-0.033em]">Reporte de Crisis</p>
+<p class="text-[#617589] dark:text-gray-400 text-base font-normal leading-normal">Toma una foto si es seguro hacerlo. Luego, inicia el chat para recibir ayuda.</p>
+</div>
+</div>
+<div class="flex flex-col px-4 py-6 flex-1 justify-center items-center">
+<div class="flex flex-col items-center gap-6 w-full">
+<div class="bg-gray-100 dark:bg-gray-800 bg-center bg-no-repeat aspect-video bg-cover rounded-lg w-full max-w-[480px] flex items-center justify-center" data-alt="Camera viewfinder area placeholder" style='background-image: url("https://lh3.googleusercontent.com/aida-public/AB6AXuD3IEU5cb1XALA02_B6GgmpHnS5XZjCVv3hz4IyIvn0AbbwgW6nQ-ONvdRAQfSoCfRALkAYUlCfU-0k-pt648Bk9otW4R7LS-0XS7icl1h0eAVoiUAnY-eoZP83ybPKLAEiWvuuo4mog2YcxIFHwGIj7bp1ZrQzt_h6qm_lbYAqZYP_Ig0VAXu_ElQJ19FeXsV5PYNXA8GtSvYVT1ik-LSrF7nky2rSgOVjDfoopj9Cpc4_BLeOw-TRhnY-eU2y9cT_jKG187_mjd4");'>
+<div class="flex flex-col items-center gap-4 text-center p-4">
+<div class="bg-white/10 dark:bg-black/20 p-4 rounded-full backdrop-blur-sm">
+<span class="material-symbols-outlined text-white text-5xl">photo_camera</span>
+</div>
+<p class="text-white text-lg font-bold">La cámara está desactivada</p>
+<p class="text-white/80 text-sm max-w-xs">Para tomar una foto como evidencia, necesitamos acceso a tu cámara.</p>
+<button class="flex min-w-[84px] max-w-[480px] cursor-pointer items-center justify-center overflow-hidden rounded-lg h-10 px-4 bg-white/90 text-gray-800 text-sm font-bold leading-normal tracking-[0.015em] hover:bg-white transition-colors">
+<span class="truncate">Permitir Acceso</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="flex flex-col items-center gap-4 pt-6">
+<div class="flex px-4 py-3 justify-center">
+<button class="flex w-full max-w-sm cursor-pointer items-center justify-center overflow-hidden rounded-lg h-12 px-5 bg-primary text-white gap-2 pl-5 text-base font-bold leading-normal tracking-[0.015em] hover:bg-primary/90 transition-colors">
+<span class="material-symbols-outlined text-white" style="font-size: 24px;">chat</span>
+<span class="truncate">Iniciar Chat de Ayuda</span>
+</button>
+</div>
+<p class="text-[#617589] dark:text-gray-400 text-sm font-normal leading-normal pb-3 pt-1 px-4 text-center">Tu información es confidencial y segura.</p>
+</div>
+</main>
+</div>
+</div>
+</div>
+</div>
+</body></html>
